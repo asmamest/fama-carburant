@@ -22,6 +22,14 @@ html, body { min-height: 100%; }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial, 'Helvetica Neue', sans-serif; }
 button, input, select { font: inherit; }
 
+.leaflet-container { height: 100%; width: 100%; font-family: Arial, 'Helvetica Neue', sans-serif; }
+.leaflet-control-zoom { margin: 96px 16px 0 0 !important; border: 0 !important; box-shadow: 0 8px 24px rgba(15, 23, 42, .16) !important; }
+.leaflet-control-zoom a { color: #0f172a !important; border: 0 !important; }
+.fuel-marker-wrapper { background: transparent; border: 0; }
+.fuel-marker { position: relative; display: grid; place-items: center; width: 34px; height: 34px; border: 4px solid white; border-radius: 50% 50% 50% 0; background: var(--marker-color); box-shadow: 0 5px 14px rgba(15,23,42,.3); transform: rotate(-45deg); transition: transform .2s ease, scale .2s ease; }
+.fuel-marker span { width: 9px; height: 9px; border-radius: 50%; background: white; transform: rotate(45deg); }
+.fuel-marker.is-selected { scale: 1.22; box-shadow: 0 7px 20px rgba(15,23,42,.38); }
+.leaflet-popup-content-wrapper { border-radius: 14px; }
 .map-surface { background: #b9d6cf; }
 .map-grid { background-image: linear-gradient(28deg, transparent 47%, rgba(255,255,255,.55) 48%, transparent 49%), linear-gradient(112deg, transparent 46%, rgba(255,255,255,.4) 47%, transparent 48%); background-size: 130px 110px, 170px 150px; }
 .map-water { background: #91c8d3; border-radius: 48% 52% 0 0; box-shadow: inset 12px 0 30px rgba(255,255,255,.2); }
