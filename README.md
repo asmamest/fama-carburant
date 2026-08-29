@@ -52,8 +52,4 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 
 Les contributions doivent préserver Neon comme source de vérité, ne pas introduire de données mockées et garder l’expérience accessible sur mobile.
 
-## Licence
-
-Projet en cours de définition.
-
-[Continuer avec v0](https://v0.app/chat/projects/prj_8nkQSwXZ8XdYmiND5U2t3z9ZqfrE)
+Made with love, Rabi ya7mi Tounes ❤️
