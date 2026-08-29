@@ -21,6 +21,11 @@
 html, body { min-height: 100%; }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial, 'Helvetica Neue', sans-serif; }
 button, input, select { font: inherit; }
+@media (max-width: 640px) {
+  .leaflet-control-zoom { margin-top: 168px !important; margin-right: 10px !important; }
+  .leaflet-control-attribution { font-size: 9px; }
+  .leaflet-popup-content { margin: 10px; }
+}
 
 .leaflet-container { height: 100%; width: 100%; font-family: Arial, 'Helvetica Neue', sans-serif; }
 .leaflet-control-zoom { margin: 96px 16px 0 0 !important; border: 0 !important; box-shadow: 0 8px 24px rgba(15, 23, 42, .16) !important; }
