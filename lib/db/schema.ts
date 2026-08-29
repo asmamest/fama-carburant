@@ -18,3 +18,18 @@ export const stationReports = pgTable('station_reports', {
   status: text('status').notNull(),
   reportedAt: timestamp('reported_at', { withTimezone: true }).notNull(),
 })
+
+export const stationContributions = pgTable('station_contributions', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  city: text('city').notNull(),
+  address: text('address').notNull(),
+  lat: doublePrecision('lat').notNull(),
+  lng: doublePrecision('lng').notNull(),
+  gpsAccuracy: doublePrecision('gps_accuracy').notNull(),
+  photoPath: text('photo_path'),
+  status: text('status').notNull(),
+  rejectionReason: text('rejection_reason'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+})
