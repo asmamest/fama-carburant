@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, doublePrecision } from 'drizzle-orm/pg-core'
+import { pgTable, text, timestamp, uuid, doublePrecision, uniqueIndex } from 'drizzle-orm/pg-core'
 
 export const stations = pgTable('stations', {
   id: text('id').primaryKey(),
@@ -18,6 +18,16 @@ export const stationReports = pgTable('station_reports', {
   status: text('status').notNull(),
   reportedAt: timestamp('reported_at', { withTimezone: true }).notNull(),
 })
+
+export const communityActions = pgTable('community_actions', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  contributionId: uuid('contribution_id').notNull(),
+  userId: text('user_id').notNull(),
+  action: text('action').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => ({
+  contributionUserUnique: uniqueIndex('community_actions_contribution_user_unique').on(table.contributionId, table.userId),
+}))
 
 export const stationContributions = pgTable('station_contributions', {
   id: uuid('id').defaultRandom().primaryKey(),

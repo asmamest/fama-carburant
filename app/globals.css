@@ -32,7 +32,9 @@ button, input, select { font: inherit; }
 .leaflet-control-zoom a { color: #0f172a !important; border: 0 !important; }
 .fuel-marker-wrapper { background: transparent; border: 0; }
 .fuel-marker { position: relative; display: grid; place-items: center; width: 34px; height: 34px; border: 4px solid white; border-radius: 50% 50% 50% 0; background: var(--marker-color); box-shadow: 0 5px 14px rgba(15,23,42,.3); transform: rotate(-45deg); transition: transform .2s ease, scale .2s ease; }
-.fuel-marker span { width: 9px; height: 9px; border-radius: 50%; background: white; transform: rotate(45deg); }
+.fuel-marker { display: flex; align-items: center; justify-content: center; gap: 2px; overflow: hidden; }
+.fuel-marker i { display: block; width: 7px; height: 7px; border-radius: 50%; transform: rotate(45deg); }
+.fuel-marker span { width: 10px; height: 10px; border-radius: 50%; background: white; transform: rotate(45deg); }
 .fuel-marker.is-selected { scale: 1.22; box-shadow: 0 7px 20px rgba(15,23,42,.38); }
 .leaflet-popup-content-wrapper { border-radius: 14px; }
 .map-surface { background: #b9d6cf; }

@@ -1,17 +1,17 @@
 import { NextResponse } from 'next/server'
-import { desc, eq } from 'drizzle-orm'
+import { desc, eq, sql } from 'drizzle-orm'
 import { db } from '@/lib/db'
 import { stationReports, stations } from '@/lib/db/schema'
 import type { FuelType, Station, StationStatus } from '@/lib/stations'
 
 const fuels: FuelType[] = ['Essence', 'Gasoil', 'Sans plomb']
-const statuses: StationStatus[] = ['available', 'unavailable', 'uncertain']
+const statuses: StationStatus[] = ['available', 'unavailable', 'uncertain', 'no_recent_information']
 
 export async function GET() {
   try {
     const [rows, reports] = await Promise.all([
       db.select().from(stations),
-      db.select().from(stationReports).orderBy(desc(stationReports.reportedAt)),
+      db.select().from(stationReports).where(sql`${stationReports.reportedAt} >= now() - interval '2 hours'`).orderBy(desc(stationReports.reportedAt)),
     ])
     const latest = new Map<string, typeof reports[number]>()
     for (const report of reports) {
@@ -21,7 +21,7 @@ export async function GET() {
     const data: Station[] = rows.map((row) => {
       const rowFuels = fuels.map((fuel) => {
         const report = latest.get(`${row.id}:${fuel}`)
-        const status = statuses.includes(report?.status as StationStatus) ? report!.status as StationStatus : 'uncertain'
+        const status = statuses.includes(report?.status as StationStatus) ? report!.status as StationStatus : 'no_recent_information'
         const updatedAt = report?.reportedAt?.toISOString() ?? row.createdAt.toISOString()
         return { fuel, status, updatedAt }
       })
