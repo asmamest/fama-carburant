@@ -9,11 +9,10 @@ export const statusColor: Record<StationStatus, string> = { available: 'bg-emera
 export const statusText: Record<StationStatus, string> = { available: 'text-emerald-700', unavailable: 'text-rose-700', uncertain: 'text-amber-700', no_recent_information: 'text-slate-500' }
 
 export function stationStatus(station: Station): StationStatus {
-  if (station.fuels.length === 0) return 'no_recent_information'
+  if (station.fuels.length === 0) return 'available'
   const statuses = station.fuels.map((fuel) => fuel.status)
   if (statuses.includes('available')) return 'available'
   if (statuses.length > 0 && statuses.every((status) => status === 'unavailable')) return 'unavailable'
-  if (statuses.length > 0 && statuses.every((status) => status === 'no_recent_information')) return 'no_recent_information'
   return 'uncertain'
 }
 

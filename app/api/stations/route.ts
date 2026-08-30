@@ -5,7 +5,6 @@ import { stationReports, stations } from '@/lib/db/schema'
 import type { FuelType, Station, StationStatus } from '@/lib/stations'
 
 const fuels: FuelType[] = ['Essence', 'Gasoil', 'Sans plomb']
-const statuses: StationStatus[] = ['available', 'unavailable', 'uncertain', 'no_recent_information']
 
 export async function GET() {
   try {
@@ -21,7 +20,7 @@ export async function GET() {
     const data: Station[] = rows.map((row) => {
       const rowFuels = fuels.map((fuel) => {
         const report = latest.get(`${row.id}:${fuel}`)
-        const status = statuses.includes(report?.status as StationStatus) ? report!.status as StationStatus : 'no_recent_information'
+        const status: StationStatus = report?.status === 'available' || report?.status === 'unavailable' || report?.status === 'uncertain' ? report.status : 'available'
         const updatedAt = report?.reportedAt?.toISOString() ?? row.createdAt.toISOString()
         return { fuel, status, updatedAt }
       })
