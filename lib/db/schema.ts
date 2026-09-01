@@ -16,6 +16,7 @@ export const stationReports = pgTable('station_reports', {
   stationId: text('station_id').notNull(),
   fuel: text('fuel').notNull(),
   status: text('status').notNull(),
+  userId: text('user_id').notNull(),
   reportedAt: timestamp('reported_at', { withTimezone: true }).notNull(),
 })
 
