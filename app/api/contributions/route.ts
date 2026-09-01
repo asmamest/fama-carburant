@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { headers } from 'next/headers'
 import { and, eq, sql } from 'drizzle-orm'
+import { requireAdmin } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { stationContributions, stations } from '@/lib/db/schema'
 
@@ -9,6 +11,7 @@ const MAX_DISTANCE = 0.02
 function validText(value: unknown) { return typeof value === 'string' && value.trim().length > 0 && value.trim().length <= 180 }
 
 export async function GET() {
+  const session = await requireAdmin(await headers()); if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   try {
     const rows = await db.select({ id: stationContributions.id, name: stationContributions.name, city: stationContributions.city, status: stationContributions.status, createdAt: stationContributions.createdAt, rejectionReason: stationContributions.rejectionReason }).from(stationContributions)
     return NextResponse.json(rows)
